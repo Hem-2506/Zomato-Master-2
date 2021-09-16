@@ -8,7 +8,8 @@ import helmet from "helmet";
 import passport from "passport";
 
 // // Configs
- import googleAuthConfig from "./config/google.config"
+ import googleAuthConfig from "./config/google.config";
+ import routeConfig from "./config/route.config"
 
 // microservices routes
 import Auth from "./API/Auth";
@@ -35,6 +36,7 @@ zomato.use(passport.session());
  
 // Passport configuration
  googleAuthConfig(passport);
+ routeConfig(passport);
 
 zomato.use("/auth", Auth);
 zomato.use("/restaurant", Restaurant);

@@ -7,6 +7,7 @@ import { OrderModel } from "../../database/allModel";
 
 const Router = express.Router();
 
+import {ValidateOrderId, ValidateOrderDetails} from "../../validation/order";
 /*
 Route     /
 Des       Get all orders based on id
@@ -19,6 +20,7 @@ Router.get(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
+      await ValidateOrderId(req.params);
       const { _id } = req.params;
 
       const getOrders = await OrderModel.findOne({ user: _id });
@@ -43,6 +45,9 @@ Method    POST
 */
 Router.post("/new/:_id", async (req, res) => {
   try {
+    await ValidateOrderId(req.params);
+    await ValidateOrderDetails(req.body);
+
     const { _id } = req.params;
     const { orderDetails } = req.body;
 

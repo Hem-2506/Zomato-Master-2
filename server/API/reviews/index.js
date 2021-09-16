@@ -5,6 +5,8 @@ import passport from "passport";
 // Database modal
 import { ReviewModel } from "../../database/allModel";
 
+import { ValidateReviewData, ValidateDeleteId } from "../../validation/review";
+
 const Router = express.Router();
 
 /*
@@ -17,6 +19,9 @@ Method    POST
 */
 Router.post("/new", async (req, res) => {
   try {
+
+    await ValidateReviewData(req.body); 
+
     const { reviewData } = req.body;
 
     await ReviewModel.create(reviewData);
@@ -37,6 +42,8 @@ Method    DELETE
 */
 Router.delete("/delete/:_id", async (req, res) => {
   try {
+    
+    await ValidateDeleteId(req.params); 
     const { _id } = req.params;
 
     await ReviewModel.findByIdAndDelete(_id);
