@@ -35,7 +35,7 @@ const Brand = (props) => {
             />
           </div>
         ))}
-      </Slider>
+      </Slider>    
     </div>
   );
 };

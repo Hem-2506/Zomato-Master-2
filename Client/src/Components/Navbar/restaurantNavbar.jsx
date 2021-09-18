@@ -3,12 +3,13 @@ import { FaUserAlt } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { RiSearch2Line } from "react-icons/ri";
-
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const MobileNav = () => {
     return (
 
         <div className=" flex w-full items-center justify-between lg:hidden">
+             <AiOutlineArrowLeft />
              <div className="w-28">
                 <img
                 src="https://b.zmtcdn.com/web_assets/b40b97e677bc7b2ca77c58c61db266fe1603954218.png?fit=around|198:42&crop=198:42;*,*"
@@ -59,7 +60,7 @@ const LargeNav = () => {
     );
 };
 
-const Navbar = () => {
+const RestaurantNavbar = () => {
     return (
         <>
         <nav className="p-4 flex bg-white shadow-md lg: shadow-none w-full  items-center">
@@ -70,4 +71,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default RestaurantNavbar;

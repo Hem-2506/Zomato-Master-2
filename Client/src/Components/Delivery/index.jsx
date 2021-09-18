@@ -6,7 +6,7 @@ import Brand from './Brand';
 import RestaurantCard from '../RestaurantCard';
 
  const Delivery = () => {
-const [restaurantList, setRestaurant] = useState([
+const [restaurantList] = useState([
    {
 _id: "123456",
 photos:["https://b.zmtcdn.com/data/dish_photos/0a5/167b8a27b16d1656033f6f341917f0a5.jpg?output-format=webp"],
@@ -15,7 +15,7 @@ averageCost: 70,
 isPro: true,
 isOff: 80,
 durationOfdelivery:47,
-restaurantReviewValue: 4.1,
+restaurantReviewValue: 4.12,
 },
    {
 _id: "123456-2",
