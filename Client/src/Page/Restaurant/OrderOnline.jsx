@@ -2,6 +2,7 @@ import React, { useEffect, useState }  from 'react';
 
 // Components
 import FloatMenuBtn from '../../Components/restaurant/Order-Online/FloatMenuBtn';
+import FoodItem from '../../Components/restaurant/Order-Online/FoodItem';
 import MenuListContainer from '../../Components/restaurant/Order-Online/MenuListContainer';
 
 
