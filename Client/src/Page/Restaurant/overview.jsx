@@ -72,7 +72,9 @@ const overview = () => {
             </Link>
           </div>
           <div className="flex flex-wrap gap-3 my-4">
-            <MenuCollection menuTitle="Menu" pages="3" image="https://b.zmtcdn.com/data/menus/567/19349567/53abd4ae1afea52fe04b9d121452ae5c.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A" />
+            <MenuCollection menuTitle="Menu" pages="3" image={["https://b.zmtcdn.com/data/menus/567/19349567/53abd4ae1afea52fe04b9d121452ae5c.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+            "https://b.zmtcdn.com/data/menus/567/19349567/53abd4ae1afea52fe04b9d121452ae5c.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",  "https://b.zmtcdn.com/data/pictures/chains/5/18711475/4be376adb66b75764946d00a7dcf9991_featured_v2.jpg?output-format=webp",
+          ]} />
           </div >
           <h4 className="text-lg font-medium my-4">Cuisines</h4>
           <div className="flex flex-wrap gap-2">
