@@ -1,4 +1,5 @@
 import React, { useEffect, useState }  from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineCompass } from "react-icons/ai";
 import { BiTimeFive } from "react-icons/bi";
 
@@ -9,7 +10,11 @@ import FoodItem from '../../Components/restaurant/Order-Online/FoodItem';
 import FoodList from '../../Components/restaurant/Order-Online/FoodList';
 import MenuListContainer from '../../Components/restaurant/Order-Online/MenuListContainer';
 
+// redux actions
+import { getFoodList } from "../../Redux/Reducer/Food/Food.action";
+
 const OrderOnline = () => {
+  const [menu, setMenu] = useState([]);
     const [selected, setSelected] = useState("");
 
   const onClickHandler = (e) => {
@@ -18,11 +23,32 @@ const OrderOnline = () => {
     }
     return;
   };
+
+  const reduxState = useSelector(
+    (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    reduxState &&
+      dispatch(getFoodList(reduxState.menu)).then((data) =>
+        setMenu(data.payload.menus.menus)
+      );
+  }, [reduxState]);
+
+
     return (
         <>
            <div className="w-full h-screen flex">
            <aside className="hidden md:flex flex-col gap-3 border-r overflow-y-scroll border-gray-200 h-screen w-1/4">
-               <MenuListContainer />
+             {menu.map((item) => (
+            <MenuListContainer
+              {...item}
+              key={item._id}
+              onClickHandler={onClickHandler}
+              selected={selected}
+            />
+          ))}
                </aside>
             
                <div className="w-full px-3 md:w-3/4">
@@ -33,26 +59,10 @@ const OrderOnline = () => {
             </h4>
           </div>
             <section className="flex  h-screen overflow-y-scroll flex-col gap-3 md:gap-5">
-              <FoodList
-              title="Recommended"
-             items={[
-                {image:"https://b.zmtcdn.com/data/dish_photos/9da/7d52427082fc2c7c14bbeb86546819da.jpg?fit=around|130:130&crop=130:130;*,*",
-               title:"Biryani",
-               price:"1000",
-               rating:3,
-               description:"Delicious savory rice dish that is loaded with spicy marinated chicken, caramelized onions, and flavorful saffron rice." ,}
-             ]}
-              />
-              <FoodList
-              title="Pizza"
-             items={[
-                {image:"https://b.zmtcdn.com/data/dish_photos/9da/7d52427082fc2c7c14bbeb86546819da.jpg?fit=around|130:130&crop=130:130;*,*",
-               title:"Biryani",
-               price:"1000",
-               rating:3,
-               description:"Delicious savory rice dish that is loaded with spicy marinated chicken, caramelized onions, and flavorful saffron rice." ,}
-             ]}
-              />
+               {menu.map((item) => (
+              <FoodList key={item._id} {...item} />
+            ))}
+              
               {/* <div>
               <h2 className="bg-white top-0 w-full px-2 py-1 z-10 sticky text-xl font-semibold">Recommended</h2>
               <FoodItem

@@ -1,15 +1,35 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { useDispatch } from "react-redux";
+
+import { signIn } from "../../Redux/Reducer/Auth/Auth.action";
 
 export default function SignIn({ isOpen, setIsOpen }) {
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const dispatch = useDispatch();
+
+  const handleChange = (e) =>
+    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
   function closeModal() {
     setIsOpen(false);
   }
-  
 
+  const submit = () => {
+    setUserData({
+      email: "",
+      password: "",
+    });
+    dispatch(signIn(userData));
+  };
 
- 
+  const googlesignin = () =>
+    (window.location.href = "http://localhost:4000/auth/google");
 
   return (
     <>
@@ -56,7 +76,7 @@ export default function SignIn({ isOpen, setIsOpen }) {
                   Sign In
                 </Dialog.Title>
                 <div className="mt-2 flex flex-col gap-3 w-full">
-                  <button
+                  <button onClick={googlesignin}
                     className="py-2 justify-center rounded-lg flex items-center gap-2 w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100"
                   >
                     Signin With Google <FcGoogle />
@@ -69,6 +89,8 @@ export default function SignIn({ isOpen, setIsOpen }) {
                         type="text"
                         id="email"
                         name="email"
+                        onChange={handleChange}
+                        value={userData.email}
                         placeholder="email@email.com"
                         className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400"
                       />
@@ -79,12 +101,14 @@ export default function SignIn({ isOpen, setIsOpen }) {
                         type="password"
                         id="password"
                         placeholder="*********"
+                        value={userData.password}
                         name="password"
+                        onChange={handleChange}
                         className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400"
                       />
                     </div>
                     <div
-                    
+                    onClick={submit}
                       className="w-full  text-center bg-zomato-400 text-white py-2 rounded-lg"
                     >
                       Sign in

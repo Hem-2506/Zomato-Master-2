@@ -15,3 +15,4 @@ export const ValidateRestaurantSearchString = (restaurantObj) => {
 
   return Schema.validateAsync(restaurantObj);
 };
+

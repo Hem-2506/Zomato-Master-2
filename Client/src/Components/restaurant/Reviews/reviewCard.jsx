@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TiStarFullOutline } from "react-icons/ti";
+import { useDispatch } from "react-redux";
+import dayjs from "dayjs";
+import { getUser } from "../../../Redux/Reducer/User/user.action";
 
-const ReviewCard = () => {
- 
+const ReviewCard = (props) => {
+  const [user, setUser] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser(props.user)).then((data) =>
+      // setUser(data.payload.user.user.user)
+      console.log(data)
+    );
+  }, []);
+
 
   return (
     <>
@@ -17,7 +29,7 @@ const ReviewCard = () => {
               />
             </div>
             <div className="flex flex-col">
-              <h3 className="text-lg font-semibold">Pavan</h3>
+              <h3 className="text-lg font-semibold">{user?.fullname}</h3>
               <small className="text-gray-500">
                 5 Reviews &#8226; 3 Followers
               </small>
@@ -33,16 +45,15 @@ const ReviewCard = () => {
               3 <TiStarFullOutline />
             </span>
             <h5 className="font-regular uppercase">
-              Delivery
+            {props.isRestaurantReview ? "Dining" : "Delivery"}
             </h5>
             <small className="text-gray-500">
-              3 days ago
+            {dayjs(props.createdAt).format("DD MMM YYYY")}
             </small>
           </div>
           <div className="w-full">
             <p className="w-full text-gray-600 font-light text-base">
-            Tasteless food chicken quality doubtful . I had ordered chicken kadhai and it was so oily and had no taste at all and Chicken was not chicken.
-            Tasteless food chicken quality doubtful . I had ordered chicken kadhai and it was so oily and had no taste at all and Chicken was not chicken.
+            {props.reviewText}
             </p>
           </div>
         </div>

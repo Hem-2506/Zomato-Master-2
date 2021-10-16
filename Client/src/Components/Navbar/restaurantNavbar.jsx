@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { RiSearch2Line } from "react-icons/ri";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
-const MobileNav = () => {
+// components
+import SignIn from "../Auth/SignIn";
+import SignUp from "../Auth/SignUp";
+const MobileNav = ({ SignIn, SignUp }) => {
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const reduxState = useSelector((global) => global.user.user);
+
     return (
 
         <div className=" flex w-full items-center justify-between lg:hidden">

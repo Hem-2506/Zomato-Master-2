@@ -8,7 +8,8 @@ const FoodSchema = new mongoose.Schema(
         isContainsEgg: {type: Boolean, required: true },
         category: { type: String, required:true },
         photos: {
-            type: String, required: true,
+            type: String,
+             required: true,
             ref: "Images",
         },
         price: { type: Number, default: 150, required: true },
@@ -21,7 +22,7 @@ const FoodSchema = new mongoose.Schema(
         restaurant: {
             type: mongoose.Types.ObjectId,
             ref: "Restaurants",
-            required: true,
+             required: true,
         },
         reviews: {
             type: mongoose.Types.ObjectId,

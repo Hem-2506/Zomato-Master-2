@@ -3,6 +3,8 @@ import { FaUserAlt } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { RiSearch2Line } from "react-icons/ri";
+import { useSelector, useDispatch } from "react-redux";
+// import gravatar from "gravatar";
 
 // components
 import SignIn from "../Auth/SignIn";

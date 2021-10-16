@@ -1,13 +1,66 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import Rating from "react-rating-stars-component";
+import { useParams } from "react-router";
+import { useDispatch } from "react-redux";
 
-export default function ReviewModal({ isOpen, setIsOpen, handleRating, ...props }) {
-  
+// redux action
+import { postReviews } from "../../../Redux/Reducer/Reviews/review.action";
+
+
+
+export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
+  const [reviewData, setReviewData] = useState({
+    subject: "",
+    reviewText: "",
+    isRestaurantReview: false,
+    isFoodReview: false,
+    rating: 0,
+  });
+
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const handlechange = (e) =>
+    setReviewData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
+  const handleRating = (rating) =>
+    setReviewData((prev) => ({ ...prev, rating }));
+
+  const toggleDining = () =>
+    setReviewData((prev) => ({
+      ...prev,
+      isRestaurantReview: !reviewData.isRestaurantReview,
+      isFoodReview: false,
+    }));
+
+  const toggleDelivery = () =>
+    setReviewData((prev) => ({
+      ...prev,
+      isRestaurantReview: false,
+      isFoodReview: !reviewData.isFoodReview,
+    }));
+
+  const submit = () => {
+    dispatch(
+      postReviews({
+        ...reviewData,
+        restaurant: id,
+      })
+    );
+    setReviewData({
+      subject: "",
+      reviewText: "",
+      isRestaurantReview: false,
+      isFoodReview: false,
+      rating: 0,
+    });
+    closeModal();
+  };
+  
   return (
     <>
 
@@ -107,5 +160,5 @@ export default function ReviewModal({ isOpen, setIsOpen, handleRating, ...props 
         </Dialog>
       </Transition>
     </>
-  )
-}
+  );
+};

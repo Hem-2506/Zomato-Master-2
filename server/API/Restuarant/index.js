@@ -1,6 +1,7 @@
 // Libraries
 import express from "express";
 import passport from "passport";
+import jwt from "jsonwebtoken";
 
 // Database model
 import { RestaurantModel } from "../../database/restaurant";
@@ -24,7 +25,7 @@ Method    GET
 */
 Router.get("/", async (req, res) => {
     try {
-      await ValidateRestaurantCity(req.query);
+      // await ValidateRestaurantCity(req.query);
       const { city } = req.query;
       const restaurants = await RestaurantModel.find({ city });
   
@@ -50,7 +51,7 @@ Router.get("/", async (req, res) => {
       if (!restaurant)
         return res.status(404).json({ error: "Restaurant Not Found" });
   
-      return res.json({ restaurant });
+      return res.json({ restaurants });
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
@@ -83,6 +84,20 @@ Router.get("/", async (req, res) => {
       return res.status(500).json({ error: error.message });
     }
   });
+
+  // @Route   POST /restaurants/new
+// @des     add new restaurant
+// @access  PRIVATE
+Router.post("/new", 
+ passport.authenticate("jwt"), 
+async (req, res) => {
+  try {
+    const newRetaurant = await RestaurantModel.create(req.body.restaurantData);
+    return res.json({ restaurants: newRetaurant });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
   
-  export default Router;
+export default Router;
   

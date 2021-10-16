@@ -8,7 +8,7 @@ import CheckoutLayoutHOC from "./HOC/Checkout.HOC";
 // Component
 import Temp from "./Components/Temp";
 import Home from "./Page/Home";
-import overview from "./Page/Restaurant/overview";
+import Overview from "./Page/Restaurant/overview";
 import OrderOnline from "./Page/Restaurant/OrderOnline";
 import Reviews from "./Page/Restaurant/Reviews";
 import Menu from "./Page/Restaurant/Menu";
@@ -30,7 +30,7 @@ function App() {
    <RestaurantLayoutHOC
         path="/restaurant/:id/overview"
         exact
-        component={overview}
+        component={Overview}
       />
       <RestaurantLayoutHOC
         path="/restaurant/:id/order-online"
