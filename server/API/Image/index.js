@@ -54,9 +54,7 @@ Router.post("/", upload.single("file"), async (req, res) => {
         ACL: "public-read", // Access Control List
       };
   
-       
-
-      const uploadImage = await s3Upload(bucketOptions);
+        const uploadImage = await s3Upload(bucketOptions);
 
       await ImageModel.create({images : [{location: uploadImage.Location}]});
   

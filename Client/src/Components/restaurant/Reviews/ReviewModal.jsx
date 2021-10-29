@@ -63,7 +63,6 @@ export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
   
   return (
     <>
-
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -106,22 +105,36 @@ export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
                 >
                   Add Review
                 </Dialog.Title>
-                <div className="mt-2">
-                <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
-          <input type="radio" name="review" id="dining" />
-          <label htmlFor="dining">Dining</label>
-        </div>
-        <div className="flex items-center gap-2">
-          <input type="radio" name="review" id="delivery" />
-          <label htmlFor="delivery">Delivery</label>
-        </div>
-      </div>
-      <Rating
+                <div className="mt-2 flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="review"
+                        id="dining"
+                        checked={reviewData.isRestaurantReview}
+                        onChange={toggleDining}
+                      />
+                      <label htmlFor="dining">Dining</label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="review"
+                        id="delivery"
+                        checked={reviewData.isFoodReview}
+                        onChange={toggleDelivery}
+                      />
+                      <label htmlFor="delivery">Delivery</label>
+                    </div>
+                  </div>
+                  <Rating
                     count={5}
                     size={24}
+                    value={reviewData.rating}
                     onChange={handleRating}
                   />
+
                   <form className="flex flex-col gap-4">
                     <div className=" w-full flex flex-col gap-2">
                       <label htmlFor="subject">Subject</label>
@@ -129,7 +142,8 @@ export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
                         type="text"
                         id="subject"
                         placeholder="amazing food"
-                  
+                        value={reviewData.subject}
+                        onChange={handlechange}
                         className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400"
                       />
                     </div>
@@ -139,6 +153,8 @@ export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
                         id="reviewText"
                         placeholder="amazing food"
                         rows="5"
+                        value={reviewData.reviewText}
+                        onChange={handlechange}
                         className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400"
                       ></textarea>
                     </div>
@@ -149,7 +165,7 @@ export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
                   <button
                     type="button"
                     className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                    onClick={closeModal}
+                    onClick={submit}
                   >
                     Submit
                   </button>
@@ -161,4 +177,4 @@ export default function ReviewModal({ isOpen, setIsOpen, ...props }) {
       </Transition>
     </>
   );
-};
+}
